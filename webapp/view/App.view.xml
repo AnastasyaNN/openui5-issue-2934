@@ -1,0 +1,208 @@
+<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:uitable="sap.ui.table"
+	controllerName="sap.ui.demo.todo.controller.App"
+	displayBlock="true">
+		<App>
+			<Page>
+				<customHeader>
+					<f:ShellBar title="{i18n>TITLE}" homeIcon="./img/logo_ui5.png" />
+				</customHeader>
+				<content>
+					<f:DynamicPage>
+						<f:header>
+							<f:DynamicPageHeader pinnable="false">
+								<Input class="todoInput" id="addTodoItemInput" value="{/newTodo}" placeholder="{i18n>INPUT_PLACEHOLDER}" change=".addTodo" />
+							</f:DynamicPageHeader>
+						</f:header>
+						<f:content>
+
+							<List id="todoList"
+								items="{ path: '/todos', events: { change: '.updateItemsLeftCount' } }"
+								mode="None"
+								growing="true"
+								growingScrollToLoad="true"
+								showNoData="false"
+								showSeparators="None">
+								<headerToolbar>
+									<OverflowToolbar class="sapUiSizeCompact" visible="{= !${view>/isMobile} }">
+										<ToolbarSpacer />
+										<SearchField id="searchTodoItemsInput" liveChange=".onSearch" width="20rem"/>
+										<SegmentedButton selectedKey="all" selectionChange=".onFilter" class="sapMSegmentedButtonNoAutoWidth">
+											<items>
+												<SegmentedButtonItem text="{i18n>LABEL_ALL}" key="all"/>
+												<SegmentedButtonItem text="{i18n>LABEL_ACTIVE}" key="active"/>
+												<SegmentedButtonItem text="{i18n>LABEL_COMPLETED}" key="completed"/>
+											</items>
+										</SegmentedButton>
+										<Button id="clearCompleted" enabled="{/itemsRemovable}" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" press=".clearCompleted"/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<infoToolbar>
+									<OverflowToolbar
+										visible="{= !!${view>/filterText} }"
+										active="false">
+										<Label text="{view>/filterText}" />
+									</OverflowToolbar>
+								</infoToolbar>
+								<CustomListItem>
+									<HBox>
+										<CheckBox selected="{completed}"  />
+										<VBox justifyContent="Center">
+											<Text text="{title}"/>
+										</VBox>
+									</HBox>
+									<customData>
+										<core:CustomData key="todo-item-completed" value="{= String(${completed})}" writeToDom="true" />
+									</customData>
+								</CustomListItem>
+							</List>
+
+							<uitable:Table
+								id="testTable"
+								selectionMode="None"
+								rowHeight="30"
+								visibleRowCountMode="Auto"
+								enableCellFilter="true"
+								rowActionCount="1"
+								rows="{vm>/tableData}">
+								<uitable:columns>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 1"/>
+										<uitable:template>
+											<Text text="{vm>column1}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 2"/>
+										<uitable:template>
+											<Text text="{vm>column2}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 3"/>
+										<uitable:template>
+											<Text text="{vm>column3}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 4"/>
+										<uitable:template>
+											<Text text="{vm>column4}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 5"/>
+										<uitable:template>
+											<Text text="{vm>column5}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 6"/>
+										<uitable:template>
+											<Text text="{vm>column6}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 7"/>
+										<uitable:template>
+											<Text text="{vm>column7}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 8"/>
+										<uitable:template>
+											<Text text="{vm>column8}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 9"/>
+										<uitable:template>
+											<Text text="{vm>column9}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 10"/>
+										<uitable:template>
+											<Text text="{vm>column10}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 11"/>
+										<uitable:template>
+											<Text text="{vm>column11}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 12"/>
+										<uitable:template>
+											<Text text="{vm>column12}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 13"/>
+										<uitable:template>
+											<Text text="{vm>column13}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 14"/>
+										<uitable:template>
+											<Text text="{vm>column14}"/>
+										</uitable:template>
+									</uitable:Column>
+									<uitable:Column
+										width="10em">
+										<Label text="Column 15 with long title to show that RowAction column is covered"/>
+										<uitable:template>
+											<Text text="{vm>column15}"/>
+										</uitable:template>
+									</uitable:Column>
+								</uitable:columns>
+								<uitable:rowActionTemplate>
+									<uitable:RowAction>
+										<uitable:items>
+											<uitable:RowActionItem press="onRowActionPress" icon="sap-icon://menu2" type="Custom"/>
+										</uitable:items>
+									</uitable:RowAction>
+								</uitable:rowActionTemplate>
+							</uitable:Table>
+
+						</f:content>
+					</f:DynamicPage>
+				</content>
+
+				<footer>
+					<OverflowToolbar visible="{= !!${view>/isMobile} }">
+						<SegmentedButton selectedKey="all" selectionChange=".onFilter" class="sapMSegmentedButtonNoAutoWidth">
+							<items>
+								<SegmentedButtonItem text="All" key="all"/>
+								<SegmentedButtonItem text="Active" key="active"/>
+								<SegmentedButtonItem text="Completed" key="completed"/>
+							</items>
+						</SegmentedButton>
+						<ToolbarSpacer />
+						<Button id="clearCompleted-footer" enabled="{/itemsRemovable}" icon="sap-icon://delete" text="{i18n>CLEAR_COMPLETED}" press=".clearCompleted"/>
+					</OverflowToolbar>
+				</footer>
+
+			</Page>
+		</App>
+</mvc:View>
